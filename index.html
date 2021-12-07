@@ -28,6 +28,11 @@
         company: "Intel Corporation",
         companyURL: "https://intel.com",
         w3cid: 57705,
+      },
+      {
+        name: "Arnaud Mandy",
+        company: "Intel Corporation",
+        companyURL: "https://intel.com",
       }
     ],
     testSuiteURI: "https://github.com/web-platform-tests/wpt/labels/compute-pressure",
@@ -275,6 +280,9 @@ The Compute Pressure Observer API enables developers to understand the utilizati
         <li>
           If |options|.|cpuUtilizationThresholds:list| exists, set |this|.{{ComputePressureObserver/[[CPUUtilizationThresholds]]}}
           be a [=list=] equal to that.
+          If |options|.|cpuUtilizationThresholds:list| is greater in size than
+          |this|.{{ComputePressureObserver/[[CPUUtilizationThresholds]]}} maximum allowed size, the extra elements of |options|.|cpuUtilizationThresholds:list|
+          will be discarded.
         </li>
         <li>
           If any value in |this|.{{ComputePressureObserver/[[CPUUtilizationThresholds]]}} is less than 0.0 or greater than 1.0,
@@ -286,6 +294,9 @@ The Compute Pressure Observer API enables developers to understand the utilizati
         <li>
           If |options|.|cpuSpeedThresholds:list| exists, set |this|.{{ComputePressureObserver/[[CPUSpeedThresholds]]}}
           be a [=list=] equal to that.
+          If |options|.|cpuSpeedThresholds:list| is greater in size than
+          |this|.{{ComputePressureObserver/[[CPUSpeedThresholds]]}} maximum allowed size, the extra elements of |options|.|cpuSpeedThresholds:list|
+          will be discarded.
         </li>
         <li>
           If any value in |this|.{{ComputePressureObserver/[[CPUSpeedThresholds]]}} is less than 0.0 or greater than 1.0,
@@ -304,6 +315,27 @@ The Compute Pressure Observer API enables developers to understand the utilizati
     <p>
       The {{ComputePressureObserver/observe()}} method, when invoked, MUST run the
       following step:
+      <ol class="algorithm">
+        <li>
+          Add {{ComputePressureObserver}} to the active observer [=list=]
+        </li>
+        <li>
+          If |this:ComputePressureObserver| object is the first observer, sampling starts. Otherwise, it is already started.
+          Sampling rate at which updates occur via |this|.{{ComputePressureObserver/[[Callback]]}} is <a href=https://infra.spec.whatwg.org/#implementation-defined> implementation-defined</a>.
+        </li>
+        <li>
+          Update |this|.{{ComputePressureObserver/ComputePressureObserverUpdate/cpuSpeed}} with latest cpuSpeed calculation from samples.
+        </li>
+        <li>
+          Update |this|.{{ComputePressureObserver/ComputePressureObserverUpdate/cpuUtilization}} with latest cpuUtilization calculation from samples.
+        </li>
+        <li>
+          Update |this|.{{ComputePressureObserver/ComputePressureObserverUpdate/options}}
+        </li>
+        <li>
+          Run |this|.{{ComputePressureObserver/[[Callback]]}} with |this|.{{ComputePressureObserver/ComputePressureObserverUpdate}} as argument.
+        </li>
+      </ol>
     </p>
   </section>
   <section>
@@ -311,6 +343,12 @@ The Compute Pressure Observer API enables developers to understand the utilizati
     <p>
       The {{ComputePressureObserver/unobserve()}} method, when invoked, MUST run the
       following step:
+      <li>
+        Remove {{ComputePressureObserver}} from the active observer [=list=]
+      </li>
+      <li>
+        If |this:ComputePressureObserver| object was the last observer in the observer [=list=], sampling should stop.
+      </li>
     </p>
   </section>
 </section>
