@@ -854,15 +854,15 @@ of system resources such as the CPU.
       <ul>
         <li>
           set |observer|.{{PressureObserver/[[ObservationWindow]]}} to an [=implementation-defined=] randomized integer value in
-          milliseconds within an [=implementation-defined=] range, e.g., random between 300000 and 600000 (5 and 10 minutes).
+          milliseconds within a range between 300000 and 600000 (5 and 10 minutes).
         </li>
         <li>
           set |observer|.{{PressureObserver/[[MaxChangesThreshold]]}} to an [=implementation-defined=] randomized integer
-          value of maximum allowed changes within the |observationWindow| within an [=implementation-defined=] range.
+          value of maximum allowed changes within the |observationWindow| within a range between 50 and 100 changes.
         </li>
         <li>
           set |observer|.{{PressureObserver/[[PenaltyDuration]]}} to an [=implementation-defined=] randomized integer value
-          in milliseconds, within an [=implementation-defined=] range.
+          in milliseconds, within a range between 5000 to 10000.
         </li>
         <li>
           [=list/Empty=] the observer.{{PressureObserver/[[ChangesCountMap]]}} map.
@@ -1363,6 +1363,14 @@ of system resources such as the CPU.
           at runtime when this mitigation is running continuously. Any attempts to recalibrate
           will similarly be mitigated against.
         </p>
+        <p>
+          This mitigation is targeting slow calibration processes and should be applied not too often, to avoid
+          deteriorating the pressure state detection reliability.
+          Mitigation can be applied to an [=implementation-defined=] randomized time value in
+          milliseconds within a range between 120000 and 240000 (2 and 4 minutes).
+          Fast calibration process can be covered by [=rate obfuscation=] mitigation.
+        </p>
+
         <div class="note">
           Modern browsers throttle background tabs using [=implementation-defined=]
           heuristics in order to reduce resource usage. For example, after a period of
