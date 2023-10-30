@@ -1364,11 +1364,11 @@ of system resources such as the CPU.
           will similarly be mitigated against.
         </p>
         <p>
-          This mitigation is targeting slow calibration processes and should be applied not too often, to avoid
-          deteriorating the pressure state detection reliability.
+          This mitigation, if applied too often, can deteriorate the pressure state detection reliability.
+          Therefore it is targeted for longer calibration processes.
           Mitigation can be applied to an [=implementation-defined=] randomized time value in
           milliseconds within a range between 120000 and 240000 (2 and 4 minutes).
-          Fast calibration process can be covered by [=rate obfuscation=] mitigation.
+          Faster calibration processes can be covered by [=rate obfuscation=] mitigation.
         </p>
 
         <div class="note">
