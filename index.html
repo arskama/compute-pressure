@@ -870,20 +870,6 @@ of system resources such as the CPU.
       </ul>
       Run the [=reset observation window=] steps and start a timer to re-run the steps when the observer.{{PressureObserver/[[ObservationWindow]]}}
       time has passed, using different randomized values.
-    <aside class="note">
-      Implementers are advised to use:
-      <ul>
-        <li>
-          a range in milliseconds between 300000 and 600000 for |observer|.{{PressureObserver/[[ObservationWindow]]}}.
-        </li>
-        <li>
-          a range in between 50 and 100 changes for |observer|.{{PressureObserver/[[MaxChangesThreshold]]}}.
-        </li>
-        <li>
-          a range in milliseconds between 5000 and 10000 for |observer|.{{PressureObserver/[[PenaltyDuration]]}}.
-        </li>
-      </ul>
-    </aside>
     </p>
     <p>
       <aside class="note">
@@ -1365,6 +1351,24 @@ of system resources such as the CPU.
         </p>
       </section>
       <section>
+        <h4>Rate obfuscation parameters</h4>
+        <p><i>This section is non-normative.</i></p>
+        <p>
+          Implementers are advised to use:
+          <ul>
+            <li>
+              a range between 300000 milliseconds (5 minutes) and 600000 milliseconds (10 minutes) for |observer|.{{PressureObserver/[[ObservationWindow]]}}.
+            </li>
+            <li>
+              a range in between 50 and 100 changes for |observer|.{{PressureObserver/[[MaxChangesThreshold]]}}.
+            </li>
+            <li>
+              a range in milliseconds between 5000 and 10000 for |observer|.{{PressureObserver/[[PenaltyDuration]]}}.
+            </li>
+          </ul>
+        </p>
+      </section>
+      <section>
         <h4>Break calibration</h4>
         <p>
           In a calibration process an attacker tries to manipulate the CPU so that this
@@ -1378,13 +1382,6 @@ of system resources such as the CPU.
           will similarly be mitigated against.
         </p>
         <aside class="note">
-          This mitigation, if applied too often, can deteriorate the pressure state detection reliability.
-          Therefore it is targeted for longer calibration attack processes.
-          Implementers are advised to apply the mitigation to a randomized time value in milliseconds
-          within a range between 120000 and 240000 (2 and 4 minutes).
-          Faster calibration processes can be mitigated by [=rate obfuscation=] mitigation.
-        </aside>
-        <aside class="note">
           Modern browsers throttle background tabs using [=implementation-defined=]
           heuristics in order to reduce resource usage. For example, after a period of
           no user interaction a background tab can be throttled that will influence
@@ -1392,6 +1389,13 @@ of system resources such as the CPU.
           browsers further improves the effectiveness of the break calibration
           mitigation.
         </aside>
+      </section>
+      <section>
+        <h4>Break calibration parameters</h4>
+        <p><i>This section is non-normative.</i></p>
+        <p>
+          Implementers are advised to apply the mitigation to a randomized time value within a range
+          between 120000 milliseconds (2minutes) and 240000 milliseconds (4 minutes).
       </section>
       <section>
         <h4>Same-origin restriction</h4>
