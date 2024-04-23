@@ -189,10 +189,12 @@
         [=user agent=], host OS or underlying hardware, the method will instead throw
         {{NotSupportedError}}.
       </p>
+      <!--
       <p>
         To check what [=source types=] are supported, a user can call the static method
         {{PressureObserver/supportedSources()}}.
       </p>
+      -->
     </aside>
   </section>
   <section>
@@ -527,8 +529,9 @@ of system resources such as the CPU.
       undefined unobserve(PressureSource source);
       undefined disconnect();
       sequence&lt;PressureRecord&gt; takeRecords();
-
+      <!--
       [SameObject] static readonly attribute FrozenArray&lt;PressureSource&gt; supportedSources;
+      -->
     };
   </pre>
 
@@ -744,6 +747,7 @@ of system resources such as the CPU.
       </ol>
     </p>
   </section>
+  <!--
   <section>
     <h3>The <dfn>supportedSources</dfn> attribute</h3>
     <p>
@@ -766,6 +770,7 @@ of system resources such as the CPU.
       </p>
     </aside>
   </section>
+  -->
 </section>
 
 <section data-dfn-for="PressureRecord">
